@@ -40,6 +40,17 @@ public class ArticleController {
 
         return "index";
     }
+
+    @GetMapping("artslist")
+    public String viewPersonList(Model model) {
+
+        List<Article> arts = articleService.getAllArticles();
+
+        model.addAttribute("arts", arts);
+
+        return "artsList";
+    }
+
     @PostMapping("article")
     public ResponseEntity<Void> addArticle(@RequestBody Article article, UriComponentsBuilder builder) {
         boolean flag = articleService.addArticle(article);
@@ -47,7 +58,7 @@ public class ArticleController {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(builder.path("/article/{id}").buildAndExpand(article.getArticleId()).toUri());
+        headers              .setLocation(builder.path("/article/{id}").buildAndExpand(article.getArticleId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
     @PutMapping("article")
