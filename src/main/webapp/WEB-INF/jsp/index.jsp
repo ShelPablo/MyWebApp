@@ -10,8 +10,6 @@
       <h1>Welcome</h1>
       <h2>${message}</h2>
 
-
-
       <a href="${pageContext.request.contextPath}/user/artslist">Person List</a>
 
    </body>
